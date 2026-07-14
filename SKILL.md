@@ -13,7 +13,7 @@ description: >
 
 # Unslop
 
-Goal: text that reads like a thinking person wrote it, not like a model assembled it.
+Goal: text that reads like a thinking person wrote it, not like a model assembled it. The target is this author writing well, not the median human: average human writing is also slop, just a different flavor. Without a style profile the output is, honestly, the model's own house voice; say so once when it matters (see step 1).
 
 The key fact this skill is built on. A 2026 study by the University of Maryland and Google DeepMind (61,608 texts) showed that when AI text is edited to remove clichés and surface artifacts, detection based on structural features barely drops: from 95.5% to 93.9%. What gives text away is not the word list but the way it is built: what the author chews over, what they name, where they allow unevenness. Swapping "delve" for "explore" fixes nothing. Vocabulary tells also decay on their own: "delve" collapsed in 2025, GPT-5.1 suppresses em dashes. Structure persists. So the skill works on three levels, cheapest first:
 
@@ -24,6 +24,7 @@ The key fact this skill is built on. A 2026 study by the University of Maryland 
 ## How to work
 
 1. **Check the author profile.** If `references/style-profile.md` exists, read it in full. Profile settings override the defaults in this file (except the Epistemics section, which no profile can switch off). No profile: use defaults.
+   If no profile exists and the text will be published under the user's name, mention once that the default output carries the model's own house voice and offer calibration. Don't nag; once per conversation.
 2. **Pick the mode.**
    - *Rewriting*: the user gave you text. Keep the meaning, facts, and genre; remove the AI patterns.
    - *Writing*: the text is new. Apply the rules from the first draft, not as a cleanup pass afterwards.
@@ -32,7 +33,7 @@ The key fact this skill is built on. A 2026 study by the University of Maryland 
    - *Free edit* (default for "humanize this"): length may shrink noticeably; empty phrases get deleted, not reworded.
    - *Careful edit* (the text must fill a slot: client document, fixed format): structure survives, length stays within 80–110%.
    - *Minimal edit* (on explicit request): only unambiguous AI constructions are touched.
-5. **Read `references/blacklist.md`** before touching the text. It holds the full stop lists for level 2.
+5. **Read `references/blacklist.md` and `references/prose-benchmarks.md`** before touching the text. The first holds the stop lists for level 2; the second holds the positive benchmarks of plain good prose (sentence-length variance, slack sentences, uneven confidence) used in the final check.
 6. Run the three levels. Then the final check.
 
 ## Level 1. Typography and mechanics
@@ -96,6 +97,8 @@ Before: "The gallery serves as the association's exhibition space and features f
 
 **18. Chatbot artifacts.** "I hope this helps", "Certainly!", "You're absolutely right", "As of my last update", "in the provided search results", "While specific details are limited...". Delete silently when rewriting.
 
+**19. Clean slop (model house style).** Second-order tells that appear after a cleanup pass: the aphoristic one-liner closing every paragraph, clipped fragment pairs ("Fused, one thing."), "That's not X. That's Y." as the upgraded negative parallelism, balanced antitheses standing in for the rule of three, hooks like "The real question is" and "Here's what that means in practice". Individually these are fine; as a texture they are a new uniform. Budget: one aphoristic close per text, and if every paragraph lands with a punch, unclench a few. Added in v1.1 after this skill's own launch post got called out as AI on r/ClaudeAI; the full story is in the README.
+
 ## Level 3. Structure and epistemics
 
 This level separates text that passed a cleanup from text written like a person. The percentages are AI-share vs human-share from the Maryland study.
@@ -111,6 +114,8 @@ This level separates text that passed a cleanup from text written like a person.
 **Address the reader when the genre allows (28% vs 7%).** Human writing treats the audience as present; AI writes as though no one is watching. In posts, essays, and docs, a direct "you" is normal.
 
 **Leave endings open (59% vs 38%).** AI rounds everything to a tidy point: conflict resolved, lesson extracted. If the situation is ambiguous, leave it ambiguous.
+
+**Leave slack.** One or two sentences per text get to be written at half pressure: an underdeveloped aside, a plain flat statement, a "we'll see". Uniform maximum punch is its own machine signature; a person's attention is uneven and the prose shows it. Slack is not a fake typo or an inserted "um": those are costume.
 
 **Write like humans are allowed to.** Plain "is/has" instead of elevated substitutes. Plain verbs: wrote, moved, used, tried, died. Superlatives when true: "the first", "the only", "one of the best". Hedges and intensifiers when honest: "very", "perhaps", "tends to". These are the constructions AI avoids and humans use freely; do not sand them off.
 
@@ -152,7 +157,7 @@ Updating: on "learn from this text too", append new observations to the existing
 Mechanics can be grepped (do it if you have bash):
 
 ```bash
-grep -nE '—|not just|not only|important to note|worth noting|Additionally,|Moreover|delve|tapestry|testament|serves as|stands as|boasts|In summary|Overall,|game-chang' text.md
+grep -nE '—|not just|not only|important to note|worth noting|Additionally,|Moreover|delve|tapestry|testament|serves as|stands as|boasts|In summary|Overall,|game-chang|That.s not [a-z].* That.s|The real question|Here.s the thing|Here.s what that' text.md
 ```
 
 The author profile may change the pattern set (for example, allow em dashes). The rest is a reread:
@@ -165,6 +170,9 @@ The author profile may change the pattern set (for example, allow em dashes). Th
 6. Paragraph shapes vary; the text doesn't read like one template stamped down the page.
 7. The genre and voice of the original survived. If a profile exists: it sounds like that author.
 8. No replacement tics carried over from past edits.
+9. The outline test: read the first sentence of every paragraph in order. If they form a clean summary of the piece, the document-level structure is machine-shaped; reorder, merge, or start one section somewhere unexpected. (Exempt: specs, runbooks, and other formats where an outline is the point.)
+10. Aphorism budget: at most one punchy one-liner closing a paragraph. Count them.
+11. There is slack somewhere: at least one sentence written at half pressure, and the confidence level varies across the text (see prose-benchmarks).
 
 ## How to report
 

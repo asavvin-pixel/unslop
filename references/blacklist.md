@@ -1,6 +1,6 @@
 # Stop lists: vocabulary and rhetoric of English AI text
 
-Read in full before working on a text. This list does not declare words banned forever: a single occurrence can be fine. The problem starts where markers arrive in clusters or carry nothing. When rewriting, test every hit below with one question: "what is actually being said here?" If there is no answer, the phrase gets deleted, not paraphrased.
+Read in full before working on a text. Category 19 is different in kind: it lists what the text looks like after the other 18 are cleaned. This list does not declare words banned forever: a single occurrence can be fine. The problem starts where markers arrive in clusters or carry nothing. When rewriting, test every hit below with one question: "what is actually being said here?" If there is no answer, the phrase gets deleted, not paraphrased.
 
 Shelf life warning. The lexical layer decays: "delve" peaked in 2023–2024 and collapsed in 2025; GPT-5.1 suppresses em dashes; each model generation has its own idiolect. Word lists below are dated where possible. The habits behind them (inflation, hedging-by-template, copula avoidance) are stable; target the habit, not just the word.
 
@@ -26,6 +26,7 @@ Sources: Wikipedia's "Signs of AI writing" essay, the UMD / Google DeepMind stud
 16. Empty merisms
 17. Overgeneralized sourcing
 18. Chatbot artifacts
+19. Clean slop (model house style)
 
 ---
 
@@ -245,6 +246,7 @@ Markers:
 Fix: keep the count honest. "One reviewer", "two trade articles", the actual names.
 
 ## 18. Chatbot artifacts
+19. Clean slop (model house style)
 
 Sign: service phrases from the chat session leaked into the text. Delete silently when rewriting.
 
@@ -258,3 +260,19 @@ Markers:
 - "In this article, we will explore..."
 - placeholders: "[Your Name]", "[Describe the specific section...]", "2025-XX-XX"
 - markup debris: `utm_source=chatgpt.com`, `utm_source=openai`, `referrer=grok.com`, `turn0search0`, `oaicite`, `oai_citation`, `[cite: 3]`, `attributableIndex`, stray ``` fences, `---` breaks before headings
+
+## 19. Clean slop (model house style)
+
+Sign: second-order patterns that survive, or are produced by, a cleanup pass. This is what "edited AI" looks like: no GPT-isms left, every sentence load-bearing, every paragraph landing. Real people don't sustain that. Discovered the hard way; see the Field test section of the README.
+
+Markers:
+- an aphoristic one-liner closing paragraph after paragraph
+- "That's not X. That's Y." (the negative parallelism, upgraded)
+- clipped fragment pairs for drama: "Fused, one thing." "One system, one attractor."
+- balanced antitheses replacing banned triads: "a cliché reads as filler, an invented fact reads as fact" is fine once; three of these per text is a metronome
+- hooks: "The real question is", "Here's the thing", "Here's what that means in practice", "The part that got me:"
+- verdict verbs on studies and events: "quietly kills", "demolishes", "buries"
+- uniform confidence: no sentence in the whole text is unsure of itself
+- document-level template: hook, numbered evidence, turn ("So I built..."), qualifier, closing question. Check with the outline test in SKILL.md.
+
+Fix: not another phrase. Unclench. Let one or two sentences be ordinary (see "Leave slack" in SKILL.md and prose-benchmarks item 3). Keep one punchy close, demote the rest to plain statements. Break the document template by starting one section in the middle of a thought.
